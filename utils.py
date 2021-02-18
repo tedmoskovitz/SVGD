@@ -59,10 +59,7 @@ class Adagrad(object):
         Returns:
             np.ndarray: Adagrad update. same shape as g. 
         """
-        eps = 1e-6 # for numerical stability
-        
-        #if self.t == 0: self.r = g * g; 
-        #else:
+        eps = 1e-6 
         self.r = self.alpha * self.r + (1 - self.alpha) * (g * g)
         
         delta = self.lr * g / (eps + np.sqrt(self.r))
@@ -114,20 +111,18 @@ class Adam(object):
         return update
 
 
-def monte_carlo_estimate(f, p, n_samples=100, **kwargs):
-    # draw n_samples samples from p
-    x = p.sample(size=n_samples)
-    # return empirical average of f(x)
-    return np.mean(f(x, **kwargs))
-
 def mse(x, y):
+    """Mean squared error"""
     return np.mean((x - y)**2)
 
 def h1(x): 
+    """Test function 1"""
     return x; 
 
 def h2(x): 
+    """Test function 2"""
     return x**2; 
 
 def h3(x, omega=1, b=0):
+    """Test function 3"""
     return np.cos(omega * x + b)
