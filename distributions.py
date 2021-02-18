@@ -86,7 +86,7 @@ class GaussMixture1D(object):
         """
         score = 0
         for w, (mu, var) in zip(self.mixture_wts, self.params): 
-            score += w * self.gauss_pdf(theta, mu, var) * (-(theta - mu) / var)
+            score += w * self._gauss_pdf(theta, mu, var) * (-(theta - mu) / var)
         score = score / self.evaluate_density(theta)
         return score
 

@@ -1,10 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from distributions import *
+Distribution = Union[GaussMixture1D, LatentModel]
 
 
-def plot_svgd_fig1(xs, p_target, iter_list=[0, 1, 2]):
-    
+def plot_svgd_fig1(xs: list, p_target: Distribution, iter_list: list = [0, -1]) -> None:
+    """Reproduce Figure 1 of the SVGD figure"""
     inputs = np.linspace(-12, 12, num=200)
     n = len(iter_list)
     fig, axs = plt.subplots(1, n, figsize=(n * 3, 3), sharey=True)
@@ -26,6 +28,37 @@ def plot_svgd_fig1(xs, p_target, iter_list=[0, 1, 2]):
     axs[0].set_yticks([0.0, 0.1, 0.2, 0.3, 0.4])
     axs[0].legend(fontsize=11)
     
+    plt.show()
+
+def plot_svgd_fig2(mc_list: list, svgd_list: list) -> None:
+    """Reproduce Figure 2 of the SVGD figure"""
+    
+    assert len(mc_list) == 3 and len(svgd_list) == 3, "incorrect lengths"
+    mse_mc_x, mse_mc_x2, mse_mc_cos = mc_list
+    mse_svgd_x, mse_svgd_x2, mse_svgd_cos = svgd_list
+    
+    fig, axs = plt.subplots(1, 3, figsize=(18, 5))
+
+    # plot E[x]
+    axs[0].plot(n_list, mse_mc_x, '-o', label='Monte Carlo')
+    axs[0].plot(n_list, mse_svgd_x, '-o', label='SVGD')
+    axs[0].legend(fontsize=14)
+    axs[0].set_ylabel("$\log_{10}$ MSE", fontsize=16)
+    axs[0].set_xlabel("Sample size ($n$)", fontsize=16)
+    axs[0].set_title("Estimating $E[x]$", fontsize=18)
+
+    # plot E[x^2]
+    axs[1].plot(n_list, mse_mc_x2, '-o')
+    axs[1].plot(n_list, mse_svgd_x2, '-o')
+    axs[1].set_xlabel("Sample size ($n$)", fontsize=16)
+    axs[1].set_title("Estimating $E[x^2]$", fontsize=18)
+
+    # plot E[cos(omega * w + b)]
+    axs[2].plot(n_list, mse_mc_cos, '-o')
+    axs[2].plot(n_list, mse_svgd_cos, '-o')
+    axs[2].set_xlabel("Sample size ($n$)", fontsize=16)
+    axs[2].set_title("Estimating $E[cos(\omega x + b)]$", fontsize=18)
+
     plt.show()
 
 
