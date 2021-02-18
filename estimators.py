@@ -59,7 +59,8 @@ def run_MLE(
     p: Distribution,
     optimizer: Optimizer = Adagrad,
     num_iters: int = 500,
-    lr: float = 1e-3) -> list:
+    lr: float = 1e-3,
+    verbose: bool = True) -> list:
     """Perform maximum likelihood estimation. 
 
     Args:
@@ -68,6 +69,7 @@ def run_MLE(
         optimizer (Optimizer, optional): the inner optimizer. Defaults to Adagrad.
         num_iters (int, optional): number of iterations. Defaults to 500.
         lr (float, optional): learning rate. Defaults to 1e-3.
+        verbose (bool, optional): whether to display a progress bar. Defaults to True. 
 
     Returns:
         list: MLE estimate at each time step. 

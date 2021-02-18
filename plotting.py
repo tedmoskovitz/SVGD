@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from distributions import *
+from typing import Union
 Distribution = Union[GaussMixture1D, LatentModel]
 
 
@@ -32,7 +33,7 @@ def plot_svgd_fig1(xs: list, p_target: Distribution, iter_list: list = [0, -1]) 
 
 def plot_svgd_fig2(mc_list: list, svgd_list: list) -> None:
     """Reproduce Figure 2 of the SVGD figure"""
-    
+
     assert len(mc_list) == 3 and len(svgd_list) == 3, "incorrect lengths"
     mse_mc_x, mse_mc_x2, mse_mc_cos = mc_list
     mse_svgd_x, mse_svgd_x2, mse_svgd_cos = svgd_list
@@ -74,7 +75,7 @@ def plot_dists_p2(theta_hist: list, labels: list) -> None:
     for i, label in enumerate(labels):
         sns.distplot(theta_initial[:, i], hist=False, bins=20, kde=True,
              kde_kws = {'shade': False, 'linewidth': 2},
-             label=label, ax=axs[0], color=f'C{i}', norm_hist=True)
+             label=f"$p({label}|D)$", ax=axs[0], color=f'C{i}', norm_hist=True)
     
     # plot final distributions
     axs[1].set_title("Final Posteriors", fontsize=15)
@@ -85,6 +86,7 @@ def plot_dists_p2(theta_hist: list, labels: list) -> None:
     
     axs[0].legend(fontsize=14)
     plt.show()
+
 
 
 def plot_posterior_vs_mle_p3(posterior_hist: list, mle_hist: list, labels: list) -> None:
