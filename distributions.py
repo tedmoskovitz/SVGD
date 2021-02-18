@@ -1,7 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib
 
-AXIS = matplotlib.axes._subplots.AxesSubplot
+AXIS = type(plt.subplots()[1])
+plt.clf()
 
 class GaussMixture1D(object):
     
@@ -18,7 +20,7 @@ class GaussMixture1D(object):
         """
         assert len(params) == len(mixture_wts), "need a weight for each Gaussian"
         assert np.sum(mixture_wts) == 1, "weights must sum to one"
-        assert mixture_wts.all() >= 0, "weights must be non-negative"
+        assert np.array(mixture_wts).all() >= 0, "weights must be non-negative"
         self.N = len(params)
         self.params = params
         self.mixture_wts = mixture_wts

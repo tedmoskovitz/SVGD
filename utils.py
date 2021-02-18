@@ -11,7 +11,15 @@ def sq_dist(x: np.ndarray, y: np.ndarray) -> np.ndarray:
     return dist    
 
 
-def rbf_kernel(X):
+def rbf_kernel(X: np.ndarray) -> [np.ndarray, np.ndarray]:
+    """RBF kernel function. 
+
+    Args:
+        X (np.ndarray): data set of n d-dimensional observations 
+
+    Returns:
+        [np.ndarray, np.ndarray]: the kernel gram matrix, the derivative wrt X
+    """
 
     n, d = X.shape
     # get pairwise squared distances ||x_i - x_j||^2
