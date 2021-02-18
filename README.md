@@ -1,6 +1,6 @@
 ### Stein Variational Gradient Descent
 
-Barebones implementation of SVGD from [Liu and Wang (2016)](https://arxiv.org/abs/1608.04471). 
+Barebones implementation of SVGD from [Liu and Wang (2016)](https://arxiv.org/abs/1608.04471). Results are in ```solutions.ipynb```. 
 
 If you enjoyed this work, I'd be happy to do some more! I can be reached at ```ted@gatsby.ucl.ac.uk```. 
 
